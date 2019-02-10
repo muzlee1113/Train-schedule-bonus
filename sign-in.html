@@ -18,7 +18,50 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDT4_Zcxk3ASLN5Hci6mrDMWj7uEo2lhfc",
+            authDomain: "inclass-a64a4.firebaseapp.com",
+            databaseURL: "https://inclass-a64a4.firebaseio.com",
+            projectId: "inclass-a64a4",
+            storageBucket: "inclass-a64a4.appspot.com",
+            messagingSenderId: "967517833925"
+        };
 
+        firebase.initializeApp(config);
+
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        function googleSignin() {
+            console.log("click")
+            firebase.auth()
+
+                .signInWithPopup(provider).then(function (result) {
+                    var token = result.credential.accessToken;
+                    var user = result.user;
+
+                    console.log(token)
+                    console.log(user)
+                }).catch(function (error) {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+
+                    console.log(error.code)
+                    console.log(error.message)
+                });
+        }
+
+        function googleSignout() {
+            firebase.auth().signOut()
+
+                .then(function () {
+                    console.log('Signout Succesfull')
+                }, function (error) {
+                    console.log('Signout Failed')
+                });
+        }
+    </script>
 
 </head>
 
@@ -34,15 +77,16 @@
         <div class="row">
             <div class="col-lg-1"></div>
             <div class="col-lg-10">
-               
-            <div class="col-lg-1"></div>
+                <button onclick="googleSignin()">Sign in with Google</button>
+                <button onclick="googleSignout()">Sign out</button>
+                <div class="col-lg-1"></div>
+            </div>
         </div>
-    </div>
 
 
-    <!-- my js -->
-        <script src="assets/javascript/initial.js"></script>
-        <script src="assets/javascript/main.js"></script>
+        <!-- my js -->
+        <!-- <script src="assets/javascript/initial.js"></script>
+        <script src="assets/javascript/main.js"></script> -->
 </body>
 
 </html>
