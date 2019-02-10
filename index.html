@@ -12,7 +12,6 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
     <!-- firebase, bootstrap and moment js -->
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -29,6 +28,7 @@
             <h1 class="display-4 font-weight-bold">Trainspotting</h1>
             <p class="lead">Choose a life. Choose a job. Choose a career. Choose a family. Choose ... the train you
                 wanna get on.</p>
+                <button type="button" class="btn btn-primary" id = "signInWithGoogle">Sign in with Google</button>
         </div>
     </div>
     <div class="container">
@@ -41,8 +41,9 @@
                     </div>
                 </div>
                 <div class="card border border-dark rounded mb-3">
-                    <div class="card-header text-dark bg-warning font-weight-bold">
-                        Current Train Schedule
+                    <div class="card-header text-dark bg-warning font-weight-bold align-middle">
+                            Current Train Schedule
+                            <span><button type="button" class="btn btn-primary float-right" id = "update">Update</button></span>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -53,6 +54,7 @@
                                     <th scope="col">Frequency (min)</th>
                                     <th scope="col">Next Arrival</th>
                                     <th scope="col">Minutes Away</th>
+                                    <th scope="col">#</th> 
                                 </tr>
                             </thead>
                             <tbody id="trainList">
@@ -98,10 +100,9 @@
     </div>
 
 
-    <!-- jquery and my js -->
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script> -->
-    <script src="assets/javascript/main.js"></script>
+    <!-- my js -->
+        <script src="assets/javascript/initial.js"></script>
+        <script src="assets/javascript/main.js"></script>
 </body>
 
 </html>

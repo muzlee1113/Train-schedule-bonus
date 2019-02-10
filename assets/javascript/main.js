@@ -1,19 +1,28 @@
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyDT4_Zcxk3ASLN5Hci6mrDMWj7uEo2lhfc",
-    authDomain: "inclass-a64a4.firebaseapp.com",
-    databaseURL: "https://inclass-a64a4.firebaseio.com",
-    projectId: "inclass-a64a4",
-    storageBucket: "inclass-a64a4.appspot.com",
-    messagingSenderId: "967517833925"
-};
-firebase.initializeApp(config);
+// update every 1 min
+setInterval(updateAll, 60000);
 
-// Create a variable to reference the database.
-var database = firebase.database();
+//authentication
+var provider = new firebase.auth.GoogleAuthProvider();
+provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+firebase.auth().signInWithPopup(provider).then(function(result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
 
 // Initial Values
-//pull current time from moment js
 var currentTime;
 
 
@@ -35,6 +44,9 @@ database.ref().on("child_added", function (childSnapshot) {
         "<td>" + childSnapshot.val().frequency + "</td>" +
         "<td>" + nextTrainConverted + "</td>" +
         "<td>" + minutesAway + "</td>" +
+        "<td>" +
+        '<button type="button" class="btn btn-primary float-left" id ="' + childSnapshot.val().trainName + '">Remove</button>'
+        + "</td>" +
         "</tr>")
 })
 
@@ -64,10 +76,41 @@ function math(firstTrain, frequency) {
         nextTrainConverted = firstTrain
         // use moment js difference to count the duration between first train and now in minutes
         var diff = moment().diff(moment(firstTrainConverted), "minutes")
-        minutesAway = diff
+        minutesAway = -diff
     }
 }
 
+function updateAll() {
+    database.ref().once("value").then(function (snapshot) {
+        $(".train").remove()
+        console.log(snapshot)
+        snapshot.forEach(function (childSnapshot) {
+            // Log everything that's coming out of snapshot
+            console.log(childSnapshot.val());
+            //prepare the firstTrain and frequency variables for the math function
+            firstTrain = childSnapshot.val().firstTrain
+            frequency = childSnapshot.val().frequency
+            // Run the math function
+            math(firstTrain, frequency);
+            // append full list of the trains to the screen
+            $("#trainList").append(
+                "<tr class='train'>" +
+                "<td>" + childSnapshot.val().trainName + "</td>" +
+                "<td>" + childSnapshot.val().destination + "</td>" +
+                "<td>" + childSnapshot.val().frequency + "</td>" +
+                "<td>" + nextTrainConverted + "</td>" +
+                "<td>" + minutesAway + "</td>" +
+                "<td>" +
+                '<button type="button" class="btn btn-primary float-left control" id ="' + childSnapshot.val().trainName + '">Remove</button>'
+                + "</td>" +
+                "</tr>")
+        });
+    })
+}
+
+
+//click handlers
+//submit button
 //create a function to grab user input and push it to firebase
 $("#add-train").on("click", function (event) {
     event.preventDefault();
@@ -85,6 +128,26 @@ $("#add-train").on("click", function (event) {
         frequency: frequency,
     });
 });
+
+
+//update button
+$("#update").on("click", function () {
+    console.log("click")
+    updateAll()
+})
+
+//remove button
+$("#trainList").on("click", "button", function(){
+    console.log("remove clicked")
+    var id = $(this).attr("id")
+    database.ref().orderByChild('trainName').equalTo(id)
+    .once('value').then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+        childSnapshot.ref.remove();
+        updateAll()
+    });
+});
+})
 
 //function for the time picker of frist train
 $('#firstTrain').datetimepicker({
