@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Train Schedule</title>
+    <!-- style sheets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+    <!-- firebase, bootstrap and moment js -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+
+
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid bg-warning">
+        <div class="container">
+            <h1 class="display-4 font-weight-bold">Trainspotting</h1>
+            <p class="lead">Choose a life. Choose a job. Choose a career. Choose a family. Choose ... the train you
+                wanna get on.</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <div class="card border border-dark rounded mb-3">
+                    <div class="card-header text-dark bg-warning font-weight-bold" id = "now">
+                        Now is:
+                    </div>
+                </div>
+                <div class="card border border-dark rounded mb-3">
+                    <div class="card-header text-dark bg-warning font-weight-bold">
+                        Current Train Schedule
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Train Name</th>
+                                    <th scope="col">Destination</th>
+                                    <th scope="col">Frequency (min)</th>
+                                    <th scope="col">Next Arrival</th>
+                                    <th scope="col">Minutes Away</th>
+                                </tr>
+                            </thead>
+                            <tbody id="trainList">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card border border-dark rounded mb-3">
+                    <div class="card-header text-dark bg-warning font-weight-bold">
+                        Add Train
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="trainName">Train Name</label>
+                                <input type="name" class="form-control" id="trainName" placeholder="Enter train name">
+                            </div>
+                            <div class="form-group">
+                                <label for="destination">Destination</label>
+                                <input type="name" class="form-control" id="destination"
+                                    placeholder="Enter destination">
+                            </div>
+                            <div class="form-group">
+                                <label for="firstTrain">First Train Time</label>
+                                <div class="input-group date">
+                                    <input class="form-control required" type="text" id="firstTrain" value="00:00" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="frequency">Frequency</label>
+                                <input type="number" class="form-control" id="frequency" placeholder="Enter in minutes">
+                            </div>
+                            <button id="add-train" type="submit" class="btn btn-warning font-weight-bold">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
+
+
+    <!-- jquery and my js -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script> -->
+    <script src="assets/javascript/main.js"></script>
+</body>
+
+</html>
