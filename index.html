@@ -15,8 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 
 
@@ -28,7 +27,9 @@
             <h1 class="display-4 font-weight-bold">Trainspotting</h1>
             <p class="lead">Choose a life. Choose a job. Choose a career. Choose a family. Choose ... the train you
                 wanna get on.</p>
-                <button type="button" class="btn btn-primary" id = "signInWithGoogle">Sign in with Google</button>
+            <button class="btn btn-primary" onclick="googleSignin()">Sign in with Google</button>
+            <button class="btn btn-primary" onclick="githubSignin()">Sign in with Github</button>
+            <button class="btn btn-primary" onclick="googleSignout()">Sign out</button>
         </div>
     </div>
     <div class="container">
@@ -36,14 +37,15 @@
             <div class="col-lg-1"></div>
             <div class="col-lg-10">
                 <div class="card border border-dark rounded mb-3">
-                    <div class="card-header text-dark bg-warning font-weight-bold" id = "now">
+                    <div class="card-header text-dark bg-warning font-weight-bold" id="now">
                         Now is:
                     </div>
                 </div>
                 <div class="card border border-dark rounded mb-3">
                     <div class="card-header text-dark bg-warning font-weight-bold align-middle">
-                            Current Train Schedule
-                            <span><button type="button" class="btn btn-primary float-right" id = "update">Update</button></span>
+                        Current Train Schedule
+                        <span><button type="button" class="btn btn-primary float-right"
+                                id="update">Update</button></span>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -54,7 +56,7 @@
                                     <th scope="col">Frequency (min)</th>
                                     <th scope="col">Next Arrival</th>
                                     <th scope="col">Minutes Away</th>
-                                    <th scope="col">Manage</th> 
+                                    <th scope="col">Manage</th>
                                 </tr>
                             </thead>
                             <tbody id="trainList">
@@ -90,7 +92,8 @@
                                 <label for="frequency">Frequency</label>
                                 <input type="number" class="form-control" id="frequency" placeholder="Enter in minutes">
                             </div>
-                            <button id="add-train" type="submit" class="btn btn-warning font-weight-bold">Submit</button>
+                            <button id="add-train" type="submit"
+                                class="btn btn-warning font-weight-bold">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -101,8 +104,8 @@
 
 
     <!-- my js -->
-        <script src="assets/javascript/initial.js"></script>
-        <script src="assets/javascript/main.js"></script>
+    <script src="assets/javascript/initial.js"></script>
+    <script src="assets/javascript/main.js"></script>
 </body>
 
 </html>

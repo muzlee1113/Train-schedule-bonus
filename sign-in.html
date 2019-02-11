@@ -32,9 +32,10 @@
         firebase.initializeApp(config);
 
         var provider = new firebase.auth.GoogleAuthProvider();
+        var provider2 = new firebase.auth.GithubAuthProvider();
+
 
         function googleSignin() {
-            console.log("click")
             firebase.auth()
 
                 .signInWithPopup(provider).then(function (result) {
@@ -50,6 +51,24 @@
                     console.log(error.code)
                     console.log(error.message)
                 });
+        }
+
+        function githubSignin() {
+           firebase.auth().signInWithPopup(provider2)
+
+           .then(function(result) {
+              var token = result.credential.accessToken;
+              var user = result.user;
+
+              console.log(token)
+              console.log(user)
+           }).catch(function(error) {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+
+              console.log(error.code)
+              console.log(error.message)
+           });
         }
 
         function googleSignout() {
@@ -75,11 +94,12 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-10">
-                <button onclick="googleSignin()">Sign in with Google</button>
-                <button onclick="googleSignout()">Sign out</button>
-                <div class="col-lg-1"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <button class="btn btn-primary" onclick="googleSignin()">Sign in with Google</button>
+                <button class="btn btn-primary" onclick = "githubSignin()">Sign in with Github</button>
+                <button class="btn btn-primary" onclick="googleSignout()">Sign out</button>
+                <div class="col-lg-2"></div>
             </div>
         </div>
 

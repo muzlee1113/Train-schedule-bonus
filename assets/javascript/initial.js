@@ -15,52 +15,74 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 //authentication
+
 var provider = new firebase.auth.GoogleAuthProvider();
+var provider2 = new firebase.auth.GithubAuthProvider();
 
-        function googleSignin() {
-           firebase.auth()
 
-           .signInWithPopup(provider).then(function(result) {
-              var token = result.credential.accessToken;
-              var user = result.user;
+function googleSignin() {
+    firebase.auth()
 
-              console.log(token)
-              console.log(user)
-           }).catch(function(error) {
-              var errorCode = error.code;
-              var errorMessage = error.message;
+        .signInWithPopup(provider).then(function (result) {
+            var token = result.credential.accessToken;
+            var user = result.user;
 
-              console.log(error.code)
-              console.log(error.message)
-           });
-        }
+            console.log(token)
+            console.log(user)
+        }).catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
 
-        function googleSignout() {
-           firebase.auth().signOut()
+            console.log(error.code)
+            console.log(error.message)
+        });
+}
 
-           .then(function() {
-              console.log('Signout Succesfull')
-           }, function(error) {
-              console.log('Signout Failed')  
-           });
-        }
+function githubSignin() {
+    firebase.auth().signInWithPopup(provider2)
 
+        .then(function (result) {
+            var token = result.credential.accessToken;
+            var user = result.user;
+
+            console.log(token)
+            console.log(user)
+        }).catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+
+            console.log(error.code)
+            console.log(error.message)
+        });
+}
+
+function googleSignout() {
+    firebase.auth().signOut()
+
+        .then(function () {
+            console.log('Signout Succesfull')
+        }, function (error) {
+            console.log('Signout Failed')
+        });
+}
 
 
 //to see if the firebase is empty or not
-database.ref().once("value")
-  .then(function(snapshot) {
-    var confirm = snapshot.hasChildren(); // true
-    console.log(confirm)
-    if(confirm === false){
-        //call the initial function
-        initial();
-        console.log("Database was empty")
-    }else{
-        console.log("Database has been filled with initialTrain Info")
-    }
+function checkFirebase() {
+    database.ref().once("value")
+        .then(function (snapshot) {
+            var confirm = snapshot.hasChildren(); // true
+            console.log(confirm)
+            if (confirm === false) {
+                //call the initial function
+                initial();
+                console.log("Database was empty")
+            } else {
+                console.log("Database has been filled with initialTrain Info")
+            }
 
-  });
+        });
+}
 
 
 var initialTrain = [
