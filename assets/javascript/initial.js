@@ -13,6 +13,7 @@ firebase.initializeApp(config);
 
 // Create a variable to reference the database.
 var database = firebase.database();
+var user = false
 
 //authentication
 
@@ -25,7 +26,7 @@ function googleSignin() {
 
         .signInWithPopup(provider).then(function (result) {
             var token = result.credential.accessToken;
-            var user = result.user;
+            user = result.user;
 
             console.log(token)
             console.log(user)
@@ -43,7 +44,7 @@ function githubSignin() {
 
         .then(function (result) {
             var token = result.credential.accessToken;
-            var user = result.user;
+            user = result.user;
 
             console.log(token)
             console.log(user)
@@ -68,21 +69,19 @@ function googleSignout() {
 
 
 //to see if the firebase is empty or not
-function checkFirebase() {
-    database.ref().once("value")
-        .then(function (snapshot) {
-            var confirm = snapshot.hasChildren(); // true
-            console.log(confirm)
-            if (confirm === false) {
-                //call the initial function
-                initial();
-                console.log("Database was empty")
-            } else {
-                console.log("Database has been filled with initialTrain Info")
-            }
+database.ref().once("value")
+    .then(function (snapshot) {
+        var confirm = snapshot.hasChildren(); // true
+        console.log(confirm)
+        if (confirm === false) {
+            //call the initial function
+            initial();
+            console.log("Database was empty")
+        } else {
+            console.log("Database has been filled with initialTrain Info")
+        }
 
-        });
-}
+    });
 
 
 var initialTrain = [
