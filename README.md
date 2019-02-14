@@ -18,4 +18,4 @@ If there is any question, feel free to send me a email (muzlee1113@gmail.com).
 I faked out all the trains on the screen.
 
 ## Deploy
-Here is the deployed link https://trainspotting.herokuapp.com/index.html
+Here is the deployed link https://trainspottingpage.herokuapp.com/index.html
